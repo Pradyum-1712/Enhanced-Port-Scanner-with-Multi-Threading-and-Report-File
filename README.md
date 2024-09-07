@@ -43,14 +43,9 @@ Run the script with the following command:
 ```bash
 python Enhanced_port_scanner.py --start 1 --end 1024 --report scan_report.csv target_ip
 
-Sure! Here's how to create a README.md file and a LICENSE file for your Enhanced_port_scanner project.
 
-1. Create README.md
-File Content:
 
-markdown
-
-# Enhanced Port Scanner
+## Enhanced Port Scanner
 
 ## Description
 
