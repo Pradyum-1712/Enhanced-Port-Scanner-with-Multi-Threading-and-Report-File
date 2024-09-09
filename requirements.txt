@@ -1,0 +1,6 @@
+argparse
+socket
+concurrent.futures
+python-nmap
+datetime
+prettytable
