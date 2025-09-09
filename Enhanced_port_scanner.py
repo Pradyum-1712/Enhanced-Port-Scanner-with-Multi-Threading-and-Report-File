@@ -3,7 +3,6 @@ import argparse
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# Function to scan a specific port
 def scan_port(target, port):
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,7 +14,6 @@ def scan_port(target, port):
         print(f"Error scanning port {port}: {e}")
         return port, False
 
-# Function to scan a range of ports
 def scan_ports(target, start_port, end_port, report_file):
     print(f"\nStarting scan on {target}")
     print(f"Scanning ports from {start_port} to {end_port}...\n")
@@ -23,7 +21,6 @@ def scan_ports(target, start_port, end_port, report_file):
     open_ports = []
     ports = range(start_port, end_port + 1)
     
-    # Using ThreadPoolExecutor to scan ports in parallel
     with ThreadPoolExecutor(max_workers=100) as executor:
         future_to_port = {executor.submit(scan_port, target, port): port for port in ports}
         
@@ -36,7 +33,7 @@ def scan_ports(target, start_port, end_port, report_file):
     print("\nScan completed!")
     print(f"Open ports: {open_ports}" if open_ports else "No open ports found.")
 
-    # Write results to the report file
+
     with open(report_file, "w") as file:
         file.write(f"Port scan report for {target}\n")
         file.write(f"Scanning ports from {start_port} to {end_port}\n")
@@ -50,7 +47,7 @@ def scan_ports(target, start_port, end_port, report_file):
     print(f"Report saved to {report_file}")
 
 if __name__ == "__main__":
-    # Argument parser to accept input from the command line
+    
     parser = argparse.ArgumentParser(description="Enhanced Port Scanner with Multi-Threading")
     parser.add_argument("target", help="Target IP address or hostname to scan")
     parser.add_argument("--start", type=int, default=1, help="Start port (default: 1)")
@@ -64,12 +61,9 @@ if __name__ == "__main__":
     end_port = args.end
     report_file = args.report
     
-    # Start timer
     start_time = datetime.now()
     
-    # Perform port scan
     scan_ports(target, start_port, end_port, report_file)
     
-    # End timer
     end_time = datetime.now()
     print(f"\nTime taken: {end_time - start_time}")
